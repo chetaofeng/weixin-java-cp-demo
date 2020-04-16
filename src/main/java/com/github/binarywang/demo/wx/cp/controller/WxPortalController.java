@@ -26,6 +26,10 @@ import me.chanjar.weixin.cp.util.crypto.WxCpCryptUtil;
 public class WxPortalController {
   private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+  //https://work.weixin.qq.com/api/doc/10514
+  //java.security.InvalidKeyException: Illegal key size:
+  // 1. https://www.cnblogs.com/jice/p/12071754.html
+  // 2. http://api.crap.cn/static/help/154090390538601000274.html
   @GetMapping(produces = "text/plain;charset=utf-8")
   public String authGet(@PathVariable Integer agentId,
                         @RequestParam(name = "msg_signature", required = false) String signature,
