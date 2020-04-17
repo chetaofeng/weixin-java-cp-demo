@@ -19,7 +19,7 @@ import me.chanjar.weixin.cp.bean.WxCpXmlOutMessage;
 import me.chanjar.weixin.cp.util.crypto.WxCpCryptUtil;
 
 /**
- * @author Binary Wang(https://github.com/binarywang)
+ * 企业微信内部应用处理
  */
 @RestController
 @RequestMapping("/wx/cp/portal/{agentId}")
@@ -36,8 +36,8 @@ public class WxPortalController {
                         @RequestParam(name = "timestamp", required = false) String timestamp,
                         @RequestParam(name = "nonce", required = false) String nonce,
                         @RequestParam(name = "echostr", required = false) String echostr) {
-    this.logger.info("\n接收到来自微信服务器的认证消息：signature = [{}], timestamp = [{}], nonce = [{}], echostr = [{}]",
-        signature, timestamp, nonce, echostr);
+    this.logger.info("\n接收到来自微信服务器的认证消息：企业微信第三方应用，agentId=[{}],signature = [{}], timestamp = [{}], nonce = [{}], echostr = [{}]",
+        agentId,signature, timestamp, nonce, echostr);
 
     if (StringUtils.isAnyBlank(signature, timestamp, nonce, echostr)) {
       throw new IllegalArgumentException("请求参数非法，请核实!");
@@ -61,8 +61,8 @@ public class WxPortalController {
                      @RequestParam("msg_signature") String signature,
                      @RequestParam("timestamp") String timestamp,
                      @RequestParam("nonce") String nonce) {
-    this.logger.info("\n接收微信请求：[signature=[{}], timestamp=[{}], nonce=[{}], requestBody=[\n{}\n] ",
-        signature, timestamp, nonce, requestBody);
+    this.logger.info("\n企业微信第三方应用接收微信请求：agentId=[{}]，[signature=[{}], timestamp=[{}], nonce=[{}], requestBody=[\n{}\n] ",
+        agentId,signature, timestamp, nonce, requestBody);
 
     final WxCpService wxCpService = WxCpConfiguration.getCpService(agentId);
     WxCpXmlMessage inMessage = WxCpXmlMessage.fromEncryptedXml(requestBody, wxCpService.getWxCpConfigStorage(),
