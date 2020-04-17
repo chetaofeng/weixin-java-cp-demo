@@ -22,6 +22,8 @@ public class WxCpProperties {
 
   private List<AppConfig> appConfigs;
 
+  private CommonConfig commonConfig;
+
   @Getter
   @Setter
   public static class AppConfig {
@@ -46,6 +48,18 @@ public class WxCpProperties {
     private String aesKey;
 
   }
+
+    @Getter
+    @Setter
+    public static class CommonConfig {
+
+        private String providerSecret;
+
+        private String token;
+
+        private String aesKey;
+
+    }
 
   @Override
   public String toString() {
